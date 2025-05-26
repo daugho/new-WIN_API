@@ -1,3 +1,0 @@
-x64/
-New_WIN_API/x64/
-.vs/
