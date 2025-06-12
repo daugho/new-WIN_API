@@ -3,6 +3,10 @@
 
 class Player
 {
+private:
+	float speed = 0.01;
+	float gravity = 0.005f;
+
 public:
 	Player(float radius);
 	~Player();
@@ -13,10 +17,10 @@ public:
 
 private:
 	float radius;
-	POINT center = { 300,300 };
-	float speed = 5;
+	float2 center = { 300,300 };
+
 
 	float yVelocity = {};
-	float gravity = 0.5f;
-	float groundY = ScreenHeight - 100;
+	
+	float groundY = SCREEN_HEIGHT - 100;
 };
