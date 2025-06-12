@@ -137,6 +137,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Player.cpp" />
     <ClCompile Include="RPG_Project.cpp" />
   </ItemGroup>
   <ItemGroup>
