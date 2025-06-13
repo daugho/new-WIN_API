@@ -1,7 +1,9 @@
 #include "framework.h"
 
-Player::Player(float radius) : radius(radius)
+Player::Player(float radius) : Circle(radius)
 {
+    bullet = new Bullet(10);
+    bullet->SetActive(false);
 }
 
 Player::~Player()
@@ -10,36 +12,17 @@ Player::~Player()
 
 void Player::Render(HDC hdc)
 {
-    Ellipse(hdc, center.x - radius, center.y - radius, center.x + radius, center.y + radius);
+    Circle::Render(hdc);
+    bullet->Render(hdc);
+
 }
 
 void Player::Update()
 {
-    if (GetAsyncKeyState(VK_RIGHT))
-    {
-        center.x += speed;
-    }
-    if (GetAsyncKeyState(VK_LEFT))
-    {
-        center.x -= speed;
-    }
-    if (GetAsyncKeyState(VK_UP))
-    {
-        center.y -= speed;
-    }
-    if (GetAsyncKeyState(VK_DOWN))
-    {
-        center.y += speed;
-    }
-    if (GetAsyncKeyState(VK_SPACE))
-    {
-        
-      
-    }
-   
+    
+    MoveControl();
     Gravity();
 
-    
 }
 
 
@@ -53,5 +36,40 @@ void Player::Gravity()
         yVelocity = 0;
     }
   
+    
+}
+
+void Player::MoveControl()
+{
+    if (GetAsyncKeyState(VK_RIGHT))
+    {
+        center.x += speed;
+    }
+    if (GetAsyncKeyState(VK_LEFT))
+    {
+        center.x -= speed;
+    }
+   // if (GetAsyncKeyState(VK_UP))
+   // {
+   //     if (center.y + radius >= groundY)
+   //     {
+   //         center.y -= speed + 100;
+   //     }
+   // }
+    if (GetAsyncKeyState(VK_DOWN))
+    {
+        center.y += speed;
+    }
+  
+    if (GetAsyncKeyState(VK_SPACE))
+    {
+        if (!isActive)
+        {
+            bullet->Fire(this->center, this->AttackPoint);
+            
+        }
+       
+    }
+    bullet->Update();
     
 }

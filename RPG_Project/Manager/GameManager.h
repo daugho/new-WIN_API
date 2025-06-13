@@ -17,6 +17,7 @@ private:
 
 	Fabric* fabric;
 	Player* player;
+
 	
 	
 };

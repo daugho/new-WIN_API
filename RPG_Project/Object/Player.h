@@ -1,12 +1,12 @@
 #pragma once
 #include "framework.h"
 
-class Player
+class Player : public Circle
 {
 private:
 	float speed = 0.1;
-	float gravity = 0.0005f;
-
+	float gravity = 0.00005f;
+	int AttackPoint = 2;
 public:
 	Player(float radius);
 	~Player();
@@ -14,14 +14,12 @@ public:
 	void Render(HDC hdc);
 	void Update();
 	void Gravity();
+	void MoveControl();
 
 private:
-	float radius;
-	float2 center = { 300,300 };
-
-
 	float yVelocity = {};
-	
 	float groundY = SCREEN_HEIGHT - 100;
-	bool isKeyPreesed = false;
+	class Bullet* bullet;
+	
+	
 };
