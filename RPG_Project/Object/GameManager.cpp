@@ -7,9 +7,9 @@ GameManager::GameManager()
 	player = new Player(50);
 	hdc = GetDC(hWnd);
 
-	backBufferDC = CreateCompatibleDC(hdc);
+	backBuffer = CreateCompatibleDC(hdc);
 	backBufferBitmap = CreateCompatibleBitmap(hdc, SCREEN_WIDTH, SCREEN_HEIGHT);
-	SelectObject(backBufferDC, backBufferBitmap);
+	SelectObject(backBuffer, backBufferBitmap);
 }
 
 GameManager::~GameManager()
@@ -17,27 +17,22 @@ GameManager::~GameManager()
 	ReleaseDC(hWnd, hdc);
 
 	DeleteObject(backBufferBitmap);
-	DeleteDC(backBufferDC);
+	DeleteDC(backBuffer);
 }
 
 void GameManager::Update()
 {
 	player->Update();
-}
-
-void GameManager::Render(HDC hdc)
-{
-	fabric->Render(hdc);
-	player->Render(hdc);
 	
 }
 
+
 void GameManager::Render()
 {
-	PatBlt(backBufferDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
+	PatBlt(backBuffer, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
 
-	fabric->Render(backBufferDC);
-	player->Render(backBufferDC);
+	fabric->Render(backBuffer);
+	player->Render(backBuffer);
 
-	BitBlt(hdc,0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,backBufferDC, 0, 0, SRCCOPY);
+	BitBlt(hdc,0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, backBuffer, 0, 0, SRCCOPY);
 }

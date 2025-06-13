@@ -31,9 +31,15 @@ void Player::Update()
     {
         center.y += speed;
     }
+    if (GetAsyncKeyState(VK_SPACE))
+    {
+        
+      
+    }
+   
     Gravity();
 
-    InvalidateRect(hWnd, nullptr, true);
+    
 }
 
 

@@ -4,8 +4,8 @@
 class Player
 {
 private:
-	float speed = 0.01;
-	float gravity = 0.005f;
+	float speed = 0.1;
+	float gravity = 0.0005f;
 
 public:
 	Player(float radius);
@@ -23,4 +23,5 @@ private:
 	float yVelocity = {};
 	
 	float groundY = SCREEN_HEIGHT - 100;
+	bool isKeyPreesed = false;
 };

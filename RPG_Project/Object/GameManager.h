@@ -7,15 +7,16 @@ public:
 	~GameManager();
 
 	void Update();
-	void Render(HDC hdc);
 	void Render();
 
 private:
 	HDC hdc;
 
-	HDC backBufferDC;
+	HDC backBuffer;
 	HBITMAP backBufferBitmap;
 
 	Fabric* fabric;
 	Player* player;
+	
+	
 };
