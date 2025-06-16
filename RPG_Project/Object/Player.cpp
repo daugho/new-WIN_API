@@ -2,16 +2,46 @@
 
 Player::Player(float radius) : Circle(radius)
 {
+    center = { 50,300 };
+    //bullet = new Bullet(10);
+    bullets.reserve(bulletPoolSize);
+    for (int i = 0; i < bulletPoolSize; i++)
+    {
+        Bullet* bullet = new Bullet(5);
+        bullet->SetActive(false);
+        bullets.push_back(bullet);
+    }
+ 
 }
 
 Player::~Player()
 {
+    //delete bullet;
+    for (Bullet* bullet : bullets)
+    {
+        delete bullet;
+    }
+	bullets.clear();
 }
 
 void Player::Update()
 {    
     MoveControl();	
 }
+
+void Player::Render(HDC hdc)
+{
+    Circle::Render(hdc);
+    //bullet->Render(hdc);
+    for (Bullet* bullet : bullets)
+    {
+        if (bullet->GetActive())
+        bullet->Render(hdc);
+    }
+
+}
+
+
 
 void Player::MoveControl()
 {
@@ -31,4 +61,37 @@ void Player::MoveControl()
     {
         center.y += speed;
     }    
+    if (GetAsyncKeyState(VK_SPACE))
+    {
+        if (!iskeyPreesed)
+        {
+            iskeyPreesed = true;
+           // bullet->Fire(center);
+
+            for (Bullet* bullet : bullets)
+            {
+                if (!bullet->GetActive())
+                {
+                
+                bullet->Fire(center);
+                break;
+                }  
+            }
+
+        }
+       
+      
+    }
+    else
+    {
+        iskeyPreesed = false;
+    }
+    //bullet->Update();
+    for (Bullet* bullet : bullets)
+    {
+        if (bullet->GetActive())
+        {
+            bullet->Update();
+        }
+    }
 }
