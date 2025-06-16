@@ -14,10 +14,9 @@
 #include <windows.h>
 using namespace std;
 extern HWND hWnd;
+#include <vector>
 
 #include "utill/float2.h"
 #include "Object/Circle.h"
 #include "Object/Player.h"
-#include "Object/Bullet.h"
-#include "Object/fabric.h"
 #include "Manager/GameManager.h"

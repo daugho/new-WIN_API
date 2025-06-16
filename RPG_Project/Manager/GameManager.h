@@ -14,10 +14,6 @@ private:
 
 	HDC backBuffer;
 	HBITMAP backBufferBitmap;
-
-	Fabric* fabric;
-	Player* player;
-
-	
+	Player* player;	
 	
 };
